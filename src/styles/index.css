@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('../styles/animations.css');
+@import url('../styles/datatable.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  scroll-behavior: smooth;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+}
+.vertical-text {
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  color: #2e3138;
+}
+
+.input-offer {
+  @apply mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm;
+}
+
+
+
+.bg-blues {
+  @apply bg-purple-600
+}
+
+.bg-blues-hover:hover {
+  @apply bg-purple-600 text-white
+
+}
+
+
+
+
+.scroll-edit::-webkit-scrollbar {
+  width: 4px;
+}
+
+.scroll-edit::-webkit-scrollbar-thumb {
+  background-color: #a5a5a5;
+  border-radius: 8px;
+}
+
+.scroll-edit::-webkit-scrollbar-track {
+  background-color: #ffffff;
+}
+
+.dark .scroll-edit::-webkit-scrollbar-thumb {
+  background-color: #555;
+}
+
+.dark .scroll-edit::-webkit-scrollbar-track {
+  background-color: #333;
+}
+
+.scroll-edit::-ms-scrollbar {
+  width: 5px;
+}
+
+.scroll-edit::-ms-scrollbar-thumb {
+  background-color: #4a4a4a;
+  border-radius: 6px;
+}
+
+.scroll-edit::-ms-scrollbar-track {
+  background-color: #dfdfdf;
+}
+
+.dark .scroll-edit::-ms-scrollbar-thumb {
+  background-color: #373737;
+}
+
+.dark .scroll-edit::-ms-scrollbar-track {
+  background-color: #373737;
+}

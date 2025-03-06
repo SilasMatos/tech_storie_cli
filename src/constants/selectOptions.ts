@@ -1,0 +1,193 @@
+
+export const segmentOptions = [
+  { value: 'PME', label: 'PME' },
+  { value: 'PURPLE', label: 'PURPLE' },
+  { value: 'OUTROS', label: 'OUTROS' },
+]
+
+export const cancelReasonOptions = [
+  { value: 'ATENDIMENTO', label: 'ATENDIMENTO' },
+  { value: 'CONCORRÊNCIA', label: 'CONCORRÊNCIA' },
+  { value: 'ERRO DE VENDA', label: 'ERRO DE VENDA' },
+  { value: 'FINANCEIRO', label: 'FINANCEIRO' },
+  { value: 'INFORMAÇÕES', label: 'INFORMAÇÕES' },
+  { value: 'IRREVERSIVEL', label: 'IRREVERSIVEL' },
+  { value: 'NÃO INFORMADO', label: 'NÃO INFORMADO' },
+  { value: 'OUTROS', label: 'OUTROS' },
+  { value: 'POUCO USO', label: 'POUCO USO' },
+  { value: 'PRECO', label: 'PRECO' },
+  { value: 'PRODUTO', label: 'PRODUTO' },
+  { value: 'REAJUSTE DE PRECO/FATURAMENTO', label: 'REAJUSTE DE PRECO/FATURAMENTO' },
+  { value: 'TÉCNICO', label: 'TÉCNICO' },
+]
+export const subOptionsIfAtendimento = [
+  { value: 'FALHA DO ATENDIMENTO TECNICO', label: 'FALHA DO ATENDIMENTO TECNICO' },
+  { value: 'PROBLEMA DE POSTURA', label: 'PROBLEMA DE POSTURA' },
+  { value: 'INSATISAFACAO COM ATENDIMENTO', label: 'INSATISAFACAO COM ATENDIMENTO' },
+  { value: 'LENTIDAO NOS PROCESSOS', label: 'LENTIDAO NOS PROCESSOS' },
+  { value: 'PROBLEMA NAO RESOLVIDO', label: 'PROBLEMA NAO RESOLVIDO' },
+  { value: 'PROBLEMAS COM PORTABILIDADE', label: 'PROBLEMAS COM PORTABILIDADE' },
+  { value: 'NAO CONCORDA COM OS PROCESSOS', label: 'NAO CONCORDA COM OS PROCESSOS' },
+  { value: 'INSATISFEITO COM DATA DE AGENDAMENTO', label: 'INSATISFEITO COM DATA DE AGENDAMENTO' },
+  { value: 'AGENDAMENTO NAO CUMPRIDO', label: 'AGENDAMENTO NAO CUMPRIDO' },
+  { value: 'MELHOR ATENDIMENTO', label: 'MELHOR ATENDIMENTO' },
+];
+
+export const subOptionsIfConcorrencia = [
+  { value: '3G CONCORRENCIA', label: '3G CONCORRENCIA' },
+  { value: 'PRODUTO/OFERTA MELHOR OUTROS', label: 'PRODUTO/OFERTA MELHOR OUTROS' },
+  { value: 'PRODUTO/OFERTA MELHOR SKY', label: 'PRODUTO/OFERTA MELHOR SKY' },
+  { value: 'PRECO AGRESSIVO', label: 'PRECO AGRESSIVO' },
+  { value: 'PRODUTO MELHOR', label: 'PRODUTO MELHOR' },
+  { value: 'PRECO AGRESSIVO OUTROS', label: 'PRECO AGRESSIVO OUTROS' },
+  { value: 'PRODUTO/OFERTA MELHOR OI', label: 'PRODUTO/OFERTA MELHOR OI' },
+  { value: 'PRECO AGRESSIVO SKY', label: 'PRECO AGRESSIVO SKY' },
+  { value: 'PRODUTO/OFERTA MELHOR VIVO', label: 'PRODUTO/OFERTA MELHOR VIVO' },
+  { value: 'OFERTA DE APARELHOS VIVO', label: 'OFERTA DE APARELHOS VIVO' },
+  { value: 'PRECO AGRESSIVO VIVO', label: 'PRECO AGRESSIVO VIVO' },
+  { value: 'PRODUTO/OFERTA MELHOR TIM FIBRA', label: 'PRODUTO/OFERTA MELHOR TIM FIBRA' },
+  { value: 'PRECO AGRESSIVO TIM FIBRA', label: 'PRECO AGRESSIVO TIM FIBRA' },
+  { value: 'TARIFAS MENORES', label: 'TARIFAS MENORES' },
+  { value: 'OFERTA DE APARELHOS TIM', label: 'OFERTA DE APARELHOS TIM' },
+  { value: 'PRECO AGRESSIVO OI', label: 'PRECO AGRESSIVO OI' },
+  { value: 'OFERTA DE APARELHOS OI', label: 'OFERTA DE APARELHOS OI' },
+];
+
+export const subOptionsIfErroDeVenda = [
+  { value: 'ERRO EM VENDAS', label: 'ERRO EM VENDAS' },
+  { value: 'DIVERGENCIA DE PACOTE', label: 'DIVERGENCIA DE PACOTE' },
+  { value: 'DESCONHECE PRODUTO', label: 'DESCONHECE PRODUTO' },
+  { value: 'NAO INFORMADO MULTA/FIDELIDADE', label: 'NAO INFORMADO MULTA/FIDELIDADE' },
+  { value: 'DESCONHECE AQUISICAO DEPENDENTE', label: 'DESCONHECE AQUISICAO DEPENDENTE' },
+  { value: 'DESCONHECE COMPRA', label: 'DESCONHECE COMPRA' },
+  { value: 'DIVERGENCIA DE VENDA', label: 'DIVERGENCIA DE VENDA' },
+  { value: 'PRO RATA NAO INFORMADA', label: 'PRO RATA NAO INFORMADA' },
+  { value: 'DIVERGENCIA DE VENDA PRODUTO', label: 'DIVERGENCIA DE VENDA PRODUTO' },
+];
+
+export const subOptionsIfFinanceiro = [
+  { value: 'DESEMPREGO', label: 'DESEMPREGO' },
+  { value: 'DIFICULDADE TEMPORARIA', label: 'DIFICULDADE TEMPORARIA' },
+];
+
+export const subOptionsIfIrreversivel = [
+  { value: 'FALECIMENTO/ FALENCIA', label: 'FALECIMENTO/ FALENCIA' },
+  { value: 'MUDANCA PARA LOCAL QUE JA POSSUI NET SERVICOS', label: 'MUDANCA PARA LOCAL QUE JA POSSUI NET SERVICOS' },
+  { value: 'MUDANCA PARA AREA NAO CABEADA', label: 'MUDANCA PARA AREA NAO CABEADA' },
+  { value: 'FALECIMENTO OU FALENCIA', label: 'FALECIMENTO OU FALENCIA' },
+  { value: 'NAO CONFIRMA END', label: 'NAO CONFIRMA END' },
+  { value: 'FALENCIA PME PF/PJ', label: 'FALENCIA PME PF/PJ' },
+  { value: 'MUDANCA PARA CIDADE SEM NET SERVICOS', label: 'MUDANCA PARA CIDADE SEM NET SERVICOS' },
+  { value: 'FALECIMENTO/FALENCIA', label: 'FALECIMENTO/FALENCIA' },
+  { value: 'FRAUDE', label: 'FRAUDE' },
+  { value: 'FALECIMENTO PME PF', label: 'FALECIMENTO PME PF' },
+  { value: 'MUDANCA DE CONTRATO COLETIVO', label: 'MUDANCA DE CONTRATO COLETIVO' },
+  { value: 'FALENCIA COVID19', label: 'FALENCIA COVID19' },
+];
+
+export const subOptionsIfNaoInformado = [
+  { value: 'SUSPENSAO TEMPORARIA COVID19', label: 'SUSPENSAO TEMPORARIA COVID19' },
+  { value: 'MUDANCA ENDERECO LEGADO NBA CM', label: 'MUDANCA ENDERECO LEGADO NBA CM' },
+  { value: 'MUDANCA ENDERECO CENARIO ERRO NBA CM', label: 'MUDANCA ENDERECO CENARIO ERRO NBA CM' },
+  { value: 'REDUCAO FUNCIONARIOS COVID19', label: 'REDUCAO FUNCIONARIOS COVID19' },
+  { value: 'DESCONTO FATURA COVID19', label: 'DESCONTO FATURA COVID19' },
+  { value: 'MUDANCA PARA LOGRADOURO SEM REDE', label: 'MUDANCA PARA LOGRADOURO SEM REDE' },
+  { value: 'MUDANCA PARA CIDADE SEM REDE', label: 'MUDANCA PARA CIDADE SEM REDE' },
+  { value: 'MUDANCA ENDERECO LEGADO NBA', label: 'MUDANCA ENDERECO LEGADO NBA' },
+];
+
+export const subOptionsIfOutros = [
+  { value: 'INFORMACOES DE CANCELAMENTO NBA', label: 'INFORMACOES DE CANCELAMENTO NBA' },
+  { value: 'REFORMA OU VIAGEM', label: 'REFORMA OU VIAGEM' },
+  { value: 'DENTRO DO PRAZO DE ARREPENDIMENTO', label: 'DENTRO DO PRAZO DE ARREPENDIMENTO' },
+  { value: 'REFORMA/VIAGEM', label: 'REFORMA/VIAGEM' },
+  { value: 'LINHA UTILIZADA POR EMPRESA', label: 'LINHA UTILIZADA POR EMPRESA' },
+  { value: 'LINHA UTILIZADA POR TERCEIROS', label: 'LINHA UTILIZADA POR TERCEIROS' },
+  { value: 'ADQUIRIU NOVA LINHA TITULAR', label: 'ADQUIRIU NOVA LINHA TITULAR' },
+  { value: 'PERDA OU ROUBO', label: 'PERDA OU ROUBO' },
+  { value: 'FAMILIARES E AMIGOS', label: 'FAMILIARES E AMIGOS' },
+];
+
+export const subOptionsIfPoucoUso = [
+  { value: 'POUCA UTILIZACAO', label: 'POUCA UTILIZACAO' },
+  { value: 'UTILIZA POUCO', label: 'UTILIZA POUCO' },
+  { value: 'TEMPORARIAMENTE SEM COMPUTADOR', label: 'TEMPORARIAMENTE SEM COMPUTADOR' },
+  { value: 'POUCO USO COVID19', label: 'POUCO USO COVID19' },
+];
+
+export const subOptionsIfPreco = [
+  { value: 'ACHA CARO PELO QUE POSSUI', label: 'ACHA CARO PELO QUE POSSUI' },
+  { value: 'PACOTE PRECO ALTO', label: 'PACOTE PRECO ALTO' },
+  { value: 'PRECO ALTO', label: 'PRECO ALTO' },
+  { value: 'DESCONTO NO COMBO', label: 'DESCONTO NO COMBO' },
+  { value: 'CLIENTE ACHA PRECO ALTO', label: 'CLIENTE ACHA PRECO ALTO' },
+];
+
+export const subOptionsIfProduto = [
+  { value: 'TROCA DE APARELHO', label: 'TROCA DE APARELHO' },
+  { value: 'INSATISFEITO COM PLANO', label: 'INSATISFEITO COM PLANO' },
+  { value: 'DESCONHECE VANTANGENS', label: 'DESCONHECE VANTANGENS' },
+  { value: 'INSATISFEITO COM O CONTEUDO OU VELOCIDADE', label: 'INSATISFEITO COM O CONTEUDO OU VELOCIDADE' },
+  { value: 'FALTA DE VANTAGENS', label: 'FALTA DE VANTAGENS' },
+  { value: 'INSATISFEITO COM VELOCIDADE/FRANQUIA', label: 'INSATISFEITO COM VELOCIDADE/FRANQUIA' },
+  { value: 'FRANQUIA INSUFICIENTE', label: 'FRANQUIA INSUFICIENTE' },
+  { value: 'INSATISFEITO COM O CONTEUDO', label: 'INSATISFEITO COM O CONTEUDO' },
+  { value: 'UTILIZA CELULAR', label: 'UTILIZA CELULAR' },
+  { value: 'DEFEITO APARELHO', label: 'DEFEITO APARELHO' },
+  { value: 'NET ESTAR NA CLARO', label: 'NET ESTAR NA CLARO' },
+];
+
+export const subOptionsIfReajusteDePrecoFaturamento = [
+  { value: 'DIVERGENCIA DE VALORES', label: 'DIVERGENCIA DE VALORES' },
+  { value: 'TERMINO PROMOCAO/DESCONTO', label: 'TERMINO PROMOCAO/DESCONTO' },
+  { value: 'REAJUSTE DA MENSALIDADE', label: 'REAJUSTE DA MENSALIDADE' },
+  { value: 'ERRO DE COBRANCA', label: 'ERRO DE COBRANCA' },
+  { value: 'COBRANCA POR SERVICO INDISPONIVEL', label: 'COBRANCA POR SERVICO INDISPONIVEL' },
+  { value: 'ERRO DE COBRANCA/FATURA', label: 'ERRO DE COBRANCA/FATURA' },
+  { value: 'COBRANCA INDEVIDA', label: 'COBRANCA INDEVIDA' },
+  { value: 'CONTESTA PACOTES ADICIONAIS', label: 'CONTESTA PACOTES ADICIONAIS' },
+  { value: 'DESCONHECE COBRANCA EXCEDENTE', label: 'DESCONHECE COBRANCA EXCEDENTE' },
+  { value: 'CONTESTA FORMA DE PAGAMENTO', label: 'CONTESTA FORMA DE PAGAMENTO' },
+];
+
+export const subOptionsIfTecnico = [
+  { value: 'PROBLEMA TECNICO DO PRODUTO', label: 'PROBLEMA TECNICO DO PRODUTO' },
+  { value: 'INDISPONIBILIDADE DO PRODUTO', label: 'INDISPONIBILIDADE DO PRODUTO' },
+  { value: 'QUEDA DE SINAL', label: 'QUEDA DE SINAL' },
+  { value: 'TELEFONE NAO FUNCIONA', label: 'TELEFONE NAO FUNCIONA' },
+  { value: 'PROBLEMAS COM WI FI', label: 'PROBLEMAS COM WI FI' },
+  { value: 'PROBLEMAS REDE EXTERNA', label: 'PROBLEMAS REDE EXTERNA' },
+  { value: 'NAVEGACAO LENTA', label: 'NAVEGACAO LENTA' },
+  { value: 'NETFONE NAO FUNCIONA', label: 'NETFONE NAO FUNCIONA' },
+];
+
+
+
+
+
+
+
+
+
+
+
+
+
+export const subCancelReasonOptions = [
+  { value: 'PROBLEMAS DE PORTABILIDADE', label: 'PROBLEMAS DE PORTABILIDADE' },
+  { value: 'LENTIDÃO NOS PROCESSOS', label: 'LENTIDÃO NOS PROCESSOS' },
+  { value: 'PROBLEMAS COM PORTABILIDADE', label: 'PROBLEMAS COM PORTABILIDADE' },
+  { value: 'PROBLEMA NAO RESOLVIDO', label: 'PROBLEMA NAO RESOLVIDO' },
+  { value: 'NAO CONCORDA COM OS PROCESSOS', label: 'NAO CONCORDA COM OS PROCESSOS' },
+  { value: 'AGENDAMENTO NAO CUMPRIDO', label: 'AGENDAMENTO NAO CUMPRIDO' },
+  { value: 'PROBLEMA DE POSTURA', label: 'PROBLEMA DE POSTURA' },
+  { value: 'INSATISFACAO COMO O ATENDIMENTO', label: 'INSATISFACAO COMO O ATENDIMENTO' },
+  { value: 'INSATISFEITO COM DATA DE AGENDAMENTO', label: 'INSATISFEITO COM DATA DE AGENDAMENTO' },
+  { value: 'FALHA DO ATENDIMENTO TECNICO', label: 'FALHA DO ATENDIMENTO TECNICO' },
+]
+
+export const statusOptions = [
+  { value: 'RETIDO', label: 'RETIDO' },
+  { value: 'NÃO RETIDO', label: 'NÃO RETIDO' },
+  { value: 'SEM LEAD', label: 'SEM LEAD' }
+]

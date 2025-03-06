@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.data-table-container {
+
+  @apply w-full rounded-md border border-border-dark bg-dark-bg-soft p-4 mt-2;
+}
+
+.search-container {
+  @apply flex justify-between items-center mb-4 gap-2 text-dark-text2;
+}
+
+.no-data-container {
+  @apply text-center p-2;
+}
+.no-data-text {
+  @apply text-xs font-medium text-dark-muted;
+}
+
+.table-container {
+  @apply flex flex-col;
+}
+.table-wrapper {
+  @apply -my-2;
+}
+.table-inner-wrapper {
+  @apply py-2 align-middle inline-block min-w-full;
+}
+.table-scroll-container {
+  @apply overflow-x-auto w-full max-w-full rounded-md;
+}
+
+.data-table {
+  @apply w-full max-w-full text-sm text-dark-text;
+}
+.table-header {
+  @apply bg-dark-accent text-xs uppercase font-medium text-dark-text2;
+}
+.table-header-cell {
+  @apply px-6 py-4 cursor-pointer relative text-center whitespace-nowrap;
+  @apply tracking-wider;
+}
+
+.sortable-header {
+  @apply flex items-center justify-center;
+}
+.sort-icon {
+  @apply ml-1 opacity-0 transition-opacity duration-200;
+}
+.sort-icon.active {
+  @apply opacity-100;
+}
+.table-header-cell:hover .hover-only {
+  @apply opacity-100;
+}
+
+.table-body {
+  @apply text-xs;
+}
+.table-row-even {
+  @apply bg-dark-bg-soft-table;
+}
+.table-row-odd {
+  @apply bg-dark-bg-soft;
+}
+.table-cell {
+  @apply px-6 py-3 whitespace-nowrap text-ellipsis text-dark-text;
+}
+
+.column-visibility-dropdown {
+
+  @apply absolute right-4 mt-0 w-64 bg-dark-bg-soft border border-border-dark rounded-md shadow-lg z-10 p-2;
+}
+.column-visibility-dropdown p {
+  @apply mb-2 text-sm font-medium text-dark-text2;
+}
+.column-visibility-dropdown label {
+  @apply flex items-center mb-1;
+}
+.column-visibility-dropdown input {
+  @apply mr-2 accent-dark-accent;
+}
+
+.pagination-container {
+  @apply flex justify-end items-center mt-4;
+}
+.pagination-info {
+  @apply mr-2 flex items-center font-medium text-dark-text2;
+}
+.pagination-button {
+  @apply px-4 py-1 border rounded-md mr-2 text-sm;
+  @apply bg-dark-bg-button hover:bg-dark-hover text-dark-text2;
+  @apply border-border-dark;
+}
+
+.sidebar-expanded {
+  @apply w-64;
+}
+.sidebar-collapsed {
+  @apply w-16;
+}
+.sidebar-transition {
+  @apply transition-all duration-300 ease-in-out;
+}

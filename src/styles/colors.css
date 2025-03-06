@@ -1,0 +1,28 @@
+/* Tema Light por padrão */
+:root {
+  /* Cores de fundo e texto */
+  --bg-color: #f8f9fa;       /* Fundo claro */
+  --text-color: #212529;     /* Texto escuro */
+
+
+  --primary-color: #6f42c1;  /* Roxo principal */
+  --secondary-color: #9f7ae2;
+
+
+  --border-color: #dee2e6;
+  --hover-color: #e4e7ea;
+}
+
+
+[data-theme="dark"] {
+  --bg-color: #212529;       /* Fundo escuro (preto/cinza) */
+  --text-color: #f8f9fa;     /* Texto claro */
+
+  /* Cores de destaque (roxos) */
+  --primary-color: #9f7ae2;  /* Roxo contrastante */
+  --secondary-color: #c6b4f9;
+
+  /* Outras variações de cor */
+  --border-color: #3a3f44;
+  --hover-color: #343a40;
+}

@@ -18,7 +18,7 @@ export default {
         'dark-text': '#A5AAB3', // Texto principal claro
         'dark-text2': '#DEE0E4', // Texto principal mais claro
         'dark-muted': '#7A808A', // Texto menos destacado
-
+        'dark-bg-container': '#28292B', // Texto menos destacado mais claro
         'purple-main': '#6f42c1',
         'purple-secondary': '#9f7ae2'
       },

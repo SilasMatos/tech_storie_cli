@@ -4,7 +4,7 @@
 
 .data-table-container {
 
-  @apply w-full rounded-md border border-border-dark bg-dark-bg-soft p-4 mt-2;
+  @apply w-full rounded-md border border-border-dark bg-dark-bg-container p-4 mt-2;
 }
 
 .search-container {

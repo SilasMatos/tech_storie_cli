@@ -11,3 +11,15 @@ export async function getProducts() {
   });
   return response.data;
 }
+
+
+
+export async function getSuppliers() {
+  const token = Cookies.get('accessToken')
+  const response = await axiosInstance.get("/suppliers", {
+    headers: {
+      Authorization: `Bearer ${token}`
+    }
+  });
+  return response.data;
+}

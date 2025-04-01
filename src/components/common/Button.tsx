@@ -9,7 +9,7 @@ type buttonProps = {
   handle: VoidFunction
   disabled?: boolean
   style?: 'purple' | 'dark'
-  type: 'button' | 'submit' | 'reset' | 'search' | 'return'
+  type?: 'button' | 'submit' | 'reset' | 'search' | 'return'
 }
 
 const Button: React.FC<buttonProps> = ({

@@ -52,7 +52,7 @@ const Historico: React.FC = () => {
 
   return (
     <div>
-      <h1>Histórico de Produtos</h1>
+      <h1 className="text-lg text-zinc-300">Histórico de Produtos</h1>
       <DataTable
         title="Produtos"
         columns={columns}

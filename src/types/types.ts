@@ -64,3 +64,15 @@ export interface Products {
   supplier?: number;
   createdBy?: number;
 }
+
+
+
+export interface Suppliers {
+  id: number
+  name: string
+  contactInfo: string,
+  createdat: string,
+  updatedat: string,
+  createdAt: string
+  updatedAt: string
+}

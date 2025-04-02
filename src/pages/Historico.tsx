@@ -2,8 +2,10 @@ import React from 'react'
 import { useGetProducts } from '../hook/useQueries'
 import DataTable from '../components/DataTable'
 import { formatDateTime } from '../utils/formatDateTime'
+import { useQueryClient } from '@tanstack/react-query'
 
 const Historico: React.FC = () => {
+  const queryClient = useQueryClient()
   const { data, error, isLoading } = useGetProducts()
 
   if (isLoading) {
@@ -15,6 +17,7 @@ const Historico: React.FC = () => {
   }
 
   interface Product {
+    id: string
     name: string
     description: string
     price: number
@@ -50,6 +53,10 @@ const Historico: React.FC = () => {
     { label: 'Atualizado em', accessor: 'updatedat' }
   ]
 
+  const refreshData = () => {
+    queryClient.invalidateQueries({ queryKey: ['products'] })
+  }
+
   return (
     <div>
       <h1 className="text-lg text-zinc-300">Histórico de Produtos</h1>
@@ -58,6 +65,7 @@ const Historico: React.FC = () => {
         columns={columns}
         data={formattedData}
         loading={isLoading}
+        onRefresh={refreshData}
       />
     </div>
   )

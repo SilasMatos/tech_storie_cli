@@ -22,8 +22,8 @@ const Login: React.FC = () => {
   })
   const mutation = useLogin()
 
-  const onSubmit = async (data: FormInputs) => {
-    await mutation.mutateAsync(data)
+  const onSubmit = (data: FormInputs) => {
+    mutation.mutate(data)
   }
 
   const [isCapsLockOn, setIsCapsLockOn] = useState(false)
@@ -31,7 +31,6 @@ const Login: React.FC = () => {
   const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
     setIsCapsLockOn(event.getModifierState('CapsLock'))
   }
-
   return (
     <div className="flex min-h-screen bg-dark-bg">
       <div className="hidden md:flex flex-col justify-center items-center w-1/2 bg-purple-main p-8 relative">

@@ -6,7 +6,7 @@ import { TiArrowBackOutline } from 'react-icons/ti'
 
 type buttonProps = {
   title: string
-  handle: VoidFunction
+  handle?: VoidFunction
   disabled?: boolean
   style?: 'purple' | 'dark'
   type?: 'button' | 'submit' | 'reset' | 'search' | 'return'
@@ -28,14 +28,15 @@ const Button: React.FC<buttonProps> = ({
         setIsRotating(false)
       }, 2000)
     }
-    handle()
   }
+
+  const htmlButtonType = type === 'search' || type === 'return' ? 'button' : type;
 
   return (
     <button
-      onClick={handleClick}
-      disabled={disabled}
-      type="button"
+    onClick={handleClick}
+    disabled={disabled}
+    type={htmlButtonType}
       className={
         style === 'purple'
           ? 'text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm flex items-center justify-center px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800'

@@ -1,22 +1,21 @@
-import { useMutation } from '@tanstack/react-query'
-import { login } from '../service/apiLogin'
 import Cookies from 'js-cookie'
-
 import { message } from 'antd'
 import { useNavigate } from 'react-router-dom'
 
+import { useLoginAuth } from './useMutation'
+
 export const useLogin = () => {
   const navigate = useNavigate()
-
-  return useMutation<any, unknown, { password: string; email: string }>({
-    mutationFn: login,
+  return useLoginAuth({
     onSuccess: data => {
       try {
-        console.log(data)
-
-        Cookies.set('accessToken', data.token)
+        Cookies.set('accessToken', data.token, {
+          expires: 1 / 24
+        })
+        setTimeout(() => {
+          navigate('/')
+        }, 1000)
         message.success('Login realizado com sucesso!')
-        navigate('/')
       } catch (error) {
         message.error('Erro ao processar os dados de login.')
       }

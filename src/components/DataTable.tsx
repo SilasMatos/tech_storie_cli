@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
-import { Maximize, Columns3, Search } from 'lucide-react'
+import { Maximize, Columns3, Search, Edit, Trash2 } from 'lucide-react'
+import { Modal, Form, Input, InputNumber, Select, Button, message } from 'antd'
+import { useDeleteProduct, useUpdateProduct } from '../hook/useMutation'
 
 interface Column {
   label: string
   accessor: string
+  render?: (item: Record<string, any>) => React.ReactNode
 }
 
 type SortDirection = 'ascending' | 'descending'
@@ -19,13 +22,15 @@ interface DataTableProps {
   columns: Column[]
   data: Record<string, any>[]
   loading: boolean
+  onRefresh?: () => void
 }
 
 const DataTable: React.FC<DataTableProps> = ({
   columns,
   data,
   title,
-  loading
+  loading,
+  onRefresh
 }) => {
   const [searchTerm, setSearchTerm] = useState<string>('')
   const [sortConfig, setSortConfig] = useState<SortConfig | null>(null)
@@ -38,6 +43,35 @@ const DataTable: React.FC<DataTableProps> = ({
   )
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false)
   const [rowsPerPage, setRowsPerPage] = useState<number>(10)
+  const [editModalVisible, setEditModalVisible] = useState<boolean>(false)
+  const [deleteModalVisible, setDeleteModalVisible] = useState<boolean>(false)
+  const [currentItem, setCurrentItem] = useState<Record<string, any> | null>(
+    null
+  )
+  const [form] = Form.useForm()
+
+  // Mutações para editar e deletar produtos
+  const deleteProduct = useDeleteProduct({
+    onSuccess: () => {
+      message.success('Produto excluído com sucesso!')
+      setDeleteModalVisible(false)
+      onRefresh && onRefresh()
+    },
+    onError: error => {
+      message.error(`Erro ao excluir produto: ${error.message}`)
+    }
+  })
+
+  const updateProduct = useUpdateProduct(currentItem?.id || '', {
+    onSuccess: () => {
+      message.success('Produto atualizado com sucesso!')
+      setEditModalVisible(false)
+      onRefresh && onRefresh()
+    },
+    onError: error => {
+      message.error(`Erro ao atualizar produto: ${error.message}`)
+    }
+  })
 
   useEffect(() => {
     const loadMoreData = () => {
@@ -49,6 +83,13 @@ const DataTable: React.FC<DataTableProps> = ({
       loadMoreData()
     }
   }, [data, lazyLoadedData])
+
+  // Atualizar o formulário quando o item atual muda
+  useEffect(() => {
+    if (currentItem && editModalVisible) {
+      form.setFieldsValue(currentItem)
+    }
+  }, [currentItem, editModalVisible, form])
 
   const filteredData = lazyLoadedData.filter(row =>
     columns.some(col =>
@@ -95,6 +136,58 @@ const DataTable: React.FC<DataTableProps> = ({
   const toggleDropdown = () => {
     setIsDropdownOpen(prev => !prev)
   }
+
+  const handleEdit = (item: Record<string, any>) => {
+    setCurrentItem(item)
+    setEditModalVisible(true)
+  }
+
+  const handleDelete = (item: Record<string, any>) => {
+    setCurrentItem(item)
+    setDeleteModalVisible(true)
+  }
+
+  const handleUpdateSubmit = (values: any) => {
+    if (currentItem?.id) {
+      updateProduct.mutate({
+        ...values,
+        id: currentItem.id
+      })
+    }
+  }
+
+  const handleDeleteConfirm = () => {
+    if (currentItem?.id) {
+      deleteProduct.mutate(currentItem.id)
+    }
+  }
+
+  // Adicionando colunas de ação
+  const allColumns = [
+    ...columns,
+    {
+      label: 'Ações',
+      accessor: 'actions',
+      render: (item: Record<string, any>) => (
+        <div className="flex gap-2">
+          <button
+            onClick={() => handleEdit(item)}
+            className="p-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none"
+            title="Editar"
+          >
+            <Edit size={16} />
+          </button>
+          <button
+            onClick={() => handleDelete(item)}
+            className="p-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none"
+            title="Excluir"
+          >
+            <Trash2 size={16} />
+          </button>
+        </div>
+      )
+    }
+  ]
 
   return (
     <div className="data-table-container">
@@ -159,26 +252,35 @@ const DataTable: React.FC<DataTableProps> = ({
                 <table className="data-table">
                   <thead className="table-header">
                     <tr>
-                      {columns
-                        .filter(col => visibleColumns.includes(col.accessor))
+                      {allColumns
+                        .filter(
+                          col =>
+                            visibleColumns.includes(col.accessor) ||
+                            col.accessor === 'actions'
+                        )
                         .map(col => (
                           <th
                             key={col.accessor}
                             scope="col"
                             className="table-header-cell"
-                            onClick={() => handleSort(col.accessor)}
+                            onClick={
+                              col.accessor !== 'actions'
+                                ? () => handleSort(col.accessor)
+                                : undefined
+                            }
                           >
                             <div className="sortable-header">
                               <span>{col.label}</span>
-                              {sortConfig?.key === col.accessor ? (
-                                sortConfig.direction === 'ascending' ? (
-                                  <IoIosArrowUp className="sort-icon active" />
+                              {col.accessor !== 'actions' &&
+                                (sortConfig?.key === col.accessor ? (
+                                  sortConfig.direction === 'ascending' ? (
+                                    <IoIosArrowUp className="sort-icon active" />
+                                  ) : (
+                                    <IoIosArrowDown className="sort-icon active" />
+                                  )
                                 ) : (
-                                  <IoIosArrowDown className="sort-icon active" />
-                                )
-                              ) : (
-                                <IoIosArrowUp className="sort-icon hover-only" />
-                              )}
+                                  <IoIosArrowUp className="sort-icon hover-only" />
+                                ))}
                             </div>
                           </th>
                         ))}
@@ -194,11 +296,19 @@ const DataTable: React.FC<DataTableProps> = ({
                             : 'table-row-odd'
                         }`}
                       >
-                        {columns
-                          .filter(col => visibleColumns.includes(col.accessor))
+                        {allColumns
+                          .filter(
+                            col =>
+                              visibleColumns.includes(col.accessor) ||
+                              col.accessor === 'actions'
+                          )
                           .map((col, colIndex) => (
                             <td key={colIndex} className="table-cell">
-                              {row[col.accessor] ?? '-'}
+                              {col.accessor === 'actions'
+                                ? col.render
+                                  ? col.render(row)
+                                  : '-'
+                                : row[col.accessor] ?? '-'}
                             </td>
                           ))}
                       </tr>
@@ -249,6 +359,128 @@ const DataTable: React.FC<DataTableProps> = ({
           </div>
         </div>
       )}
+
+      {/* Modal de Edição */}
+      <Modal
+        title="Editar Produto"
+        open={editModalVisible}
+        onCancel={() => setEditModalVisible(false)}
+        footer={null}
+      >
+        <Form form={form} layout="vertical" onFinish={handleUpdateSubmit}>
+          <Form.Item
+            name="name"
+            label="Nome"
+            rules={[
+              { required: true, message: 'Por favor, insira o nome do produto' }
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item
+            name="description"
+            label="Descrição"
+            rules={[
+              { required: true, message: 'Por favor, insira a descrição' }
+            ]}
+          >
+            <Input.TextArea rows={4} />
+          </Form.Item>
+
+          <Form.Item
+            name="price"
+            label="Preço"
+            rules={[{ required: true, message: 'Por favor, insira o preço' }]}
+          >
+            <InputNumber
+              style={{ width: '100%' }}
+              formatter={value =>
+                `R$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')
+              }
+              parser={value => value!.replace(/R\$\s?|(,*)/g, '')}
+            />
+          </Form.Item>
+
+          <Form.Item
+            name="category"
+            label="Categoria"
+            rules={[
+              { required: true, message: 'Por favor, selecione a categoria' }
+            ]}
+          >
+            <Select>
+              <Select.Option value="Eletrônicos">Eletrônicos</Select.Option>
+              <Select.Option value="Roupas">Roupas</Select.Option>
+              <Select.Option value="Alimentos">Alimentos</Select.Option>
+              <Select.Option value="Livros">Livros</Select.Option>
+              <Select.Option value="Outros">Outros</Select.Option>
+            </Select>
+          </Form.Item>
+
+          <Form.Item
+            name="stock"
+            label="Estoque"
+            rules={[
+              {
+                required: true,
+                message: 'Por favor, insira a quantidade em estoque'
+              }
+            ]}
+          >
+            <InputNumber style={{ width: '100%' }} min={0} />
+          </Form.Item>
+
+          <Form.Item
+            name="supplier"
+            label="Fornecedor"
+            rules={[
+              { required: true, message: 'Por favor, insira o fornecedor' }
+            ]}
+          >
+            <Input />
+          </Form.Item>
+
+          <Form.Item>
+            <div className="flex justify-end gap-2">
+              <Button onClick={() => setEditModalVisible(false)}>
+                Cancelar
+              </Button>
+              <Button
+                type="primary"
+                htmlType="submit"
+                loading={updateProduct.isPending}
+              >
+                Atualizar
+              </Button>
+            </div>
+          </Form.Item>
+        </Form>
+      </Modal>
+
+      {/* Modal de Confirmação de Exclusão */}
+      <Modal
+        title="Confirmar Exclusão"
+        open={deleteModalVisible}
+        onCancel={() => setDeleteModalVisible(false)}
+        footer={[
+          <Button key="cancel" onClick={() => setDeleteModalVisible(false)}>
+            Cancelar
+          </Button>,
+          <Button
+            key="delete"
+            danger
+            type="primary"
+            loading={deleteProduct.isPending}
+            onClick={handleDeleteConfirm}
+          >
+            Excluir
+          </Button>
+        ]}
+      >
+        <p>Tem certeza que deseja excluir o produto "{currentItem?.name}"?</p>
+        <p>Esta ação não pode ser desfeita.</p>
+      </Modal>
     </div>
   )
 }

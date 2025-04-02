@@ -1,8 +1,16 @@
-// src/api/axiosInstance.ts
+
 import axios from "axios";
 
 import Cookies from 'js-cookie';
 import { showModalUnauthorized } from '../context/UnauthorizedContext';
+
+interface ImportMetaEnv {
+  readonly VITE_API_URL: string;
+}
+
+declare global {
+  interface ImportMeta extends ImportMetaEnv { }
+}
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_URL,
@@ -14,6 +22,7 @@ axiosInstance.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+
 });
 
 axiosInstance.interceptors.response.use(

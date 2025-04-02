@@ -1,38 +1,24 @@
 import { useForm, Controller } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
 import Input from '../components/common/Input'
 import Select from '../components/common/Select'
+import { message } from 'antd'
 import Button from '../components/common/Button'
 import { useGetSuppliers } from '../hook/useQueries'
 import { useInsertProduct } from '../hook/useMutation'
-
-import { Suppliers } from '../types/types'
-
-const productSchema = z.object({
-  name: z.string().min(3, 'Nome deve ter pelo menos 3 caracteres'),
-  description: z
-    .string()
-    .min(10, 'Descrição deve ter pelo menos 10 caracteres'),
-  price: z
-    .string()
-    .min(1, 'Preço é obrigatório')
-    .refine(val => !isNaN(parseFloat(val)) && parseFloat(val) > 0, {
-      message: 'Preço deve ser um número positivo'
-    }),
-  category: z.string().min(2, 'Categoria deve ter pelo menos 2 caracteres'),
-  stock: z
-    .string()
-    .min(1, 'Estoque é obrigatório')
-    .refine(val => !isNaN(parseInt(val)) && parseInt(val) >= 0, {
-      message: 'Estoque deve ser um número não negativo'
-    }),
-  supplier: z.string().min(1, 'Fornecedor é obrigatório'),
-  createdBy: z.string().optional()
-})
-
-type ProductFormData = z.infer<typeof productSchema>
-
+import {
+  productFormSchema,
+  ProductFormData
+} from '../schema/products-schema-zod'
+export interface ProductFormDat {
+  name: string
+  description: string
+  price: number
+  category: string
+  stock: number
+  supplier: any
+  createdBy: any
+}
 function InsertProducts() {
   const { data: suppliers = [], isLoading } = useGetSuppliers()
   const { mutate, isPending: isSubmitting } = useInsertProduct()
@@ -42,7 +28,7 @@ function InsertProducts() {
     handleSubmit,
     formState: { errors }
   } = useForm<ProductFormData>({
-    resolver: zodResolver(productSchema),
+    resolver: zodResolver(productFormSchema),
     defaultValues: {
       name: '',
       description: '',
@@ -54,13 +40,23 @@ function InsertProducts() {
     }
   })
 
-  const onSubmit = async (data: ProductFormData) => {
-    mutate(data, {
+  const onSubmit = async (formData: ProductFormData) => {
+    const apiData: ProductFormDat = {
+      name: formData.name,
+      description: formData.description,
+      price: parseFloat(formData.price),
+      category: formData.category,
+      stock: parseInt(formData.stock),
+      supplier: parseInt(formData.supplier),
+      createdBy: formData.createdBy ? parseInt(formData.createdBy) : 0
+    }
+
+    mutate(apiData, {
       onSuccess: () => {
-        alert('Produto cadastrado com sucesso!')
+        message.success('Produto cadastrado com sucesso!')
       },
       onError: (error: any) => {
-        alert(`Erro ao cadastrar produto: ${error.message}`)
+        message.error(`Erro ao cadastrar produto: ${error.message}`)
       }
     })
   }
@@ -167,7 +163,17 @@ function InsertProducts() {
             <Controller
               name="supplier"
               control={control}
-              render={({ field }) => (
+              render={({
+                field
+              }: {
+                field: {
+                  onChange: (value: any) => void
+                  onBlur: () => void
+                  value: string
+                  name: string
+                  ref: React.Ref<any>
+                }
+              }) => (
                 <Select
                   label="Fornecedor"
                   {...field}
@@ -175,10 +181,12 @@ function InsertProducts() {
                   options={
                     isLoading
                       ? [{ value: '', label: 'Carregando...' }]
-                      : suppliers.map(supplier => ({
-                          value: supplier.id.toString(),
-                          label: supplier.name
-                        }))
+                      : suppliers.map(
+                          (supplier: { id: number; name: string }) => ({
+                            value: supplier.id.toString(),
+                            label: supplier.name
+                          })
+                        )
                   }
                   required
                 />
@@ -192,7 +200,6 @@ function InsertProducts() {
             title={isSubmitting ? 'Enviando...' : 'Cadastrar Produto'}
             type="submit"
             disabled={isSubmitting}
-            handle={() => {}}
           />
         </div>
       </form>

@@ -14,7 +14,7 @@ type buttonProps = {
 
 const Button: React.FC<buttonProps> = ({
   title,
-  handle,
+
   type,
   disabled,
   style
@@ -30,13 +30,14 @@ const Button: React.FC<buttonProps> = ({
     }
   }
 
-  const htmlButtonType = type === 'search' || type === 'return' ? 'button' : type;
+  const htmlButtonType =
+    type === 'search' || type === 'return' ? 'button' : type
 
   return (
     <button
-    onClick={handleClick}
-    disabled={disabled}
-    type={htmlButtonType}
+      onClick={handleClick}
+      disabled={disabled}
+      type={htmlButtonType}
       className={
         style === 'purple'
           ? 'text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm flex items-center justify-center px-5 py-2.5 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800'

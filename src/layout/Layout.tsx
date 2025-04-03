@@ -1,13 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import {
-  LayoutDashboard,
-  ChartPie,
-  History,
-  FileUp,
-  Database,
-  PackagePlus
-} from 'lucide-react'
+import { LayoutDashboard, History, PackagePlus } from 'lucide-react'
 
 import Header from '../components/layout/Header'
 import { Sidebar, SidebarItem } from '../components/layout/Sidebar'

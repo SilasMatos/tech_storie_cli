@@ -29,7 +29,6 @@ const Historico: React.FC = () => {
     category: string
     stock: number
     supplier: string
-    createdby: string
     createdat: string
     updatedat: string
   }
@@ -53,7 +52,6 @@ const Historico: React.FC = () => {
     { label: 'Categoria', accessor: 'category' },
     { label: 'Estoque', accessor: 'stock' },
     { label: 'Fornecedor', accessor: 'supplier' },
-    { label: 'Criado por', accessor: 'createdby' },
     { label: 'Criado em', accessor: 'createdat' },
     { label: 'Atualizado em', accessor: 'updatedat' }
   ]

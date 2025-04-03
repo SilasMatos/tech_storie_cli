@@ -3,20 +3,16 @@ import { IoIosArrowUp, IoIosArrowDown } from 'react-icons/io'
 import { Maximize, Columns3, Search, Edit, Trash2 } from 'lucide-react'
 import { Modal, Form, Input, InputNumber, Select, Button, message } from 'antd'
 import { useDeleteProduct, useUpdateProduct } from '../hook/useMutation'
-
 interface Column {
   label: string
   accessor: string
   render?: (item: Record<string, any>) => React.ReactNode
 }
-
 type SortDirection = 'ascending' | 'descending'
-
 interface SortConfig {
   key: string
   direction: SortDirection
 }
-
 interface DataTableProps {
   title: string
   columns: Column[]
@@ -24,7 +20,6 @@ interface DataTableProps {
   loading: boolean
   onRefresh?: () => void
 }
-
 const DataTable: React.FC<DataTableProps> = ({
   columns,
   data,
@@ -49,8 +44,6 @@ const DataTable: React.FC<DataTableProps> = ({
     null
   )
   const [form] = Form.useForm()
-
-  // Mutações para editar e deletar produtos
   const deleteProduct = useDeleteProduct({
     onSuccess: () => {
       message.success('Produto excluído com sucesso!')
@@ -83,8 +76,6 @@ const DataTable: React.FC<DataTableProps> = ({
       loadMoreData()
     }
   }, [data, lazyLoadedData])
-
-  // Atualizar o formulário quando o item atual muda
   useEffect(() => {
     if (currentItem && editModalVisible) {
       form.setFieldsValue(currentItem)
@@ -161,8 +152,6 @@ const DataTable: React.FC<DataTableProps> = ({
       deleteProduct.mutate(currentItem.id)
     }
   }
-
-  // Adicionando colunas de ação
   const allColumns = [
     ...columns,
     {
@@ -360,7 +349,6 @@ const DataTable: React.FC<DataTableProps> = ({
         </div>
       )}
 
-      {/* Modal de Edição */}
       <Modal
         title="Editar Produto"
         open={editModalVisible}
@@ -458,7 +446,6 @@ const DataTable: React.FC<DataTableProps> = ({
         </Form>
       </Modal>
 
-      {/* Modal de Confirmação de Exclusão */}
       <Modal
         title="Confirmar Exclusão"
         open={deleteModalVisible}

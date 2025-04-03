@@ -11,14 +11,32 @@ const Historico: React.FC = () => {
 
   if (isLoading) {
     return (
-      <div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100vh'
+        }}
+      >
         <Loader />
       </div>
     )
   }
 
   if (error) {
-    return <div>Erro ao carregar os dados: {error.message}</div>
+    return (
+      <div
+        style={{
+          color: 'red',
+          textAlign: 'center',
+          marginTop: '20px',
+          fontSize: '18px'
+        }}
+      >
+        Erro ao carregar os dados: {error.message}
+      </div>
+    )
   }
 
   interface Product {

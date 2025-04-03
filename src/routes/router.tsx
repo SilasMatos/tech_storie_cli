@@ -2,7 +2,6 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 
 import Login from '../pages/Login'
-import Dashboard from '../pages/Dashboard'
 import Private from './Private'
 import '../styles/index.css'
 import Layout from '../layout/Layout'
@@ -21,18 +20,11 @@ const Rotas: React.FC = () => {
             index
             element={
               <Private>
-                <Dashboard />
-              </Private>
-            }
-          />
-          <Route
-            path="inserir-produtos"
-            element={
-              <Private>
                 <InsertProducts />
               </Private>
             }
           />
+
           <Route
             path="historico"
             element={

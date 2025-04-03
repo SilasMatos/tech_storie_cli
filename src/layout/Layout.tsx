@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { LayoutDashboard, History, PackagePlus } from 'lucide-react'
+import { History, PackagePlus } from 'lucide-react'
 
 import Header from '../components/layout/Header'
 import { Sidebar, SidebarItem } from '../components/layout/Sidebar'
@@ -13,8 +13,8 @@ const Layout: React.FC = () => {
           <Sidebar>
             {' '}
             <SidebarItem
-              icon={<LayoutDashboard size={20} />}
-              text="Dashboard"
+              icon={<PackagePlus size={20} />}
+              text="Cadastro de produtos"
               to="/"
             />
             <SidebarItem
@@ -23,12 +23,12 @@ const Layout: React.FC = () => {
               to="historico"
               alert
             />
-            <SidebarItem
+            {/* <SidebarItem
               icon={<PackagePlus size={20} />}
               text="Cadastro de produtos"
               to="inserir-produtos"
               alert
-            />
+            /> */}
           </Sidebar>
         </div>
 

@@ -6,6 +6,7 @@ import { useForm } from 'react-hook-form'
 import { CircleAlert } from 'lucide-react'
 import logo from '../assets/store.png'
 import ButtonLogin from '../components/common/ButtonLogin'
+import { motion } from 'framer-motion'
 
 interface FormInputs {
   email: string
@@ -20,10 +21,10 @@ const Login: React.FC = () => {
   } = useForm<FormInputs>({
     mode: 'onSubmit'
   })
-  const mutation = useLogin()
+  const { mutate, isPending } = useLogin()
 
   const onSubmit = (data: FormInputs) => {
-    mutation.mutate(data)
+    mutate(data)
   }
 
   const [isCapsLockOn, setIsCapsLockOn] = useState(false)
@@ -125,14 +126,27 @@ const Login: React.FC = () => {
                 <CircleAlert size={18} />O Caps Lock está ativado!
               </p>
             </div>
-
-            <ButtonLogin
-              initialLabel="Entrar"
-              loadingLabel="Carregando..."
-              successLabel="Sucesso!"
-              errorLabel="Ocorreu um erro"
-              onClick={handleSubmit(onSubmit)}
-            />
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.98 }}
+              type="submit"
+              disabled={isPending}
+              className="text-white w-full bg-purple-main focus:ring-2 focus:outline-none focus:ring-gray-300 font-semibold rounded-lg text-sm px-5 py-3 text-center transition duration-300 shadow-lg relative overflow-hidden group"
+            >
+              <span
+                className={`${
+                  isPending ? 'opacity-0' : 'opacity-100'
+                } transition-opacity`}
+              >
+                Entrar
+              </span>
+              {isPending && (
+                <div className="absolute inset-0 flex items-center justify-center">
+                  <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+                </div>
+              )}
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-black transition-all duration-300 group-hover:w-full"></span>
+            </motion.button>
           </form>
         </div>
       </div>

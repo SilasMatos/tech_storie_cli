@@ -3,13 +3,18 @@ import { useGetProducts } from '../hook/useQueries'
 import DataTable from '../components/DataTable'
 import { formatDateTime } from '../utils/formatDateTime'
 import { useQueryClient } from '@tanstack/react-query'
+import Loader from '../components/Loader'
 
 const Historico: React.FC = () => {
   const queryClient = useQueryClient()
   const { data, error, isLoading } = useGetProducts()
 
   if (isLoading) {
-    return <div>Carregando...</div>
+    return (
+      <div>
+        <Loader />
+      </div>
+    )
   }
 
   if (error) {
